@@ -10,6 +10,11 @@ import javax.swing.JOptionPane;
 
 public class Modelo 
 {
+	
+	String baseDeDatos ="domino";
+	String contrasena ="Studium2018;";
+	String usuario = "root";
+	
 	public Connection conectar(String baseDatos, String usuario, String clave)
 	{
 		String driver = "com.mysql.jdbc.Driver";
@@ -65,12 +70,13 @@ public class Modelo
 		}
 
 	}
-	public void ejecutarIDA(String sentencia, Connection c) 
+	public void ejecutarIDA(String sentencia, Connection c, String mensajeOK) 
 	{
 		try
 		{
 			Statement statement = c.createStatement();
 			statement.executeUpdate(sentencia);
+			JOptionPane.showMessageDialog(null,"Éxito",mensajeOK, JOptionPane.INFORMATION_MESSAGE);
 		}
 		catch(SQLException e)
 		{

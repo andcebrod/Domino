@@ -1,7 +1,5 @@
 package es.studium.Domino;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -10,10 +8,12 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Choice;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import java.awt.GridLayout;
+import java.awt.FlowLayout;
 
 public class ListaParejaEli extends JFrame {
 
@@ -22,58 +22,33 @@ public class ListaParejaEli extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-
+	JButton btnEliminar = new JButton("Eliminar Pareja");
+	JButton btnCancelar = new JButton("Cancelar");
+	Choice Parejas = new Choice();
+	private final JPanel panel = new JPanel();
+	private final JPanel panel_1 = new JPanel();
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ListaParejaMod frame = new ListaParejaMod();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	/**
-	 * Create the frame.
-	 */
+	
 	public ListaParejaEli() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 476, 206);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		contentPane.setLayout(new GridLayout(3,1));
+		
+		contentPane.add(panel);
 		
 		JLabel lblSeleccioneParejaA = new JLabel("Seleccione Pareja a eliminar:");
+		panel.add(lblSeleccioneParejaA);
 		lblSeleccioneParejaA.setFont(new Font("Calibri", Font.BOLD, 15));
-		lblSeleccioneParejaA.setBounds(87, 25, 245, 14);
 		lblSeleccioneParejaA.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPane.add(lblSeleccioneParejaA);
-		
-		Choice choice = new Choice();
-		choice.setBounds(200, 87, 28, 20);
-		contentPane.add(choice);
-		
-		JButton btnModificar = new JButton("Eliminar Pareja");
-		btnModificar.setBounds(93, 175, 109, 23);
-		btnModificar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		contentPane.add(btnModificar);
-		
-		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(229, 175, 75, 23);
-		btnCancelar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		contentPane.add(btnCancelar);
+		contentPane.add(Parejas);
+		contentPane.add(panel_1);
+		panel_1.add(btnEliminar);
+		panel_1.add(btnCancelar);
+		this.setVisible(true);
 	}
 
 }

@@ -5,13 +5,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
-public class Controlador implements WindowListener, ActionListener{
+public class ControladorMenuPrincipal implements WindowListener, ActionListener{
 
 	Modelo Mo;
 	MenuPrincipal Mp;
 	NuevoTorneo Nt;
 	
-	public Controlador(MenuPrincipal mp, Modelo mo) {
+	public ControladorMenuPrincipal(MenuPrincipal mp, Modelo mo) {
 		this.Mo = mo;
 		this.Mp = mp;
 		mp.btnNuevo.addActionListener(this);
@@ -29,7 +29,8 @@ public class Controlador implements WindowListener, ActionListener{
 		}
 		if(Mp.btnAceptar.equals(ae.getSource())) {
 			String nombre = Mp.txtNombre.getText();
-			new NuevoTorneo(nombre);
+			Nt = new NuevoTorneo(nombre);
+			new ControladorNuevoTorneo(Mo, Nt);
 			Mp.dlgNombre.setVisible(false);
 			Mp.setVisible(false);
 		} else if(Mp.btnCancelar.equals(ae.getSource())) {
