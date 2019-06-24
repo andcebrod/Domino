@@ -1,0 +1,4 @@
+PAREJAS (idPareja, jugador1, jugador2, localidad)
+JORNADAS (idJornada)
+CAMPEONATOS (idCampeonato, nombreCampeonato, fechaCampeonato)
+PARTIDAS (idPartida, puntosLocal, puntosVisitante, idParejaFK1, idParejaFK2, idCampeonatoFK, idJornadaFK)

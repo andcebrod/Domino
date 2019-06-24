@@ -10,7 +10,7 @@ public class ControladorNuevoTorneo implements ActionListener, WindowListener
 	Modelo Mo;
 	NuevoTorneo Nt;
 	AddPareja Ap;
-	ConsultarClasificacion Cc;
+	ConsultarParejas Cc;
 	ListaParejaEli Ep;
 	
 	public ControladorNuevoTorneo (Modelo mo, NuevoTorneo nt){
@@ -30,8 +30,8 @@ public class ControladorNuevoTorneo implements ActionListener, WindowListener
 			new ControladorAddPareja(Ap, Mo);
 		} else if(Nt.btnConsultarParejas.equals(ae.getSource())) 
 		{
-			Cc = new ConsultarClasificacion();
-			new ControladorConsultarClasificacion(Cc, Mo);
+			Cc = new ConsultarParejas();
+			new ControladorConsultarParejas(Cc, Mo);
 		} else if(Nt.btnEliminarPareja.equals(ae.getSource())) 
 		{
 			Ep = new ListaParejaEli();
