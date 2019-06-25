@@ -20,8 +20,10 @@ public class NuevoTorneo extends JFrame{
 	JPanel pnl1 = new JPanel();
 	JPanel pnl2 = new JPanel();
 	JPanel pnl3 = new JPanel();
+	int idCampeonato;
 	
-	public NuevoTorneo(String nombre) {
+	public NuevoTorneo(String nombre, int idCamp) {
+		idCampeonato= idCamp;
 		lblNombre.setText(nombre);
 		this.setSize(450,200);
 		this.setLayout(new GridLayout(3,1));
@@ -35,8 +37,6 @@ public class NuevoTorneo extends JFrame{
 		this.add(pnl1);
 		this.add(pnl2);
 		this.add(pnl3);
-		
-		
 		this.setVisible(true);
 		
 	}

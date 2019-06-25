@@ -12,6 +12,7 @@ public class ControladorNuevoTorneo implements ActionListener, WindowListener
 	AddPareja Ap;
 	ConsultarParejas Cc;
 	ListaParejaEli Ep;
+	Torneo To;
 	
 	public ControladorNuevoTorneo (Modelo mo, NuevoTorneo nt){
 		this.Mo = mo;
@@ -38,7 +39,8 @@ public class ControladorNuevoTorneo implements ActionListener, WindowListener
 			new ControladorEliminarPareja(Ep, Mo);
 		} else if(Nt.btnComenzar.equals(ae.getSource())) 
 		{
-			new Torneo(Nt.lblNombre.getText());
+			To = new Torneo(Nt.lblNombre.getText(), Nt.idCampeonato);
+			new ControladorTorneo(To, Mo);
 		}
 	}
 	@Override

@@ -15,12 +15,12 @@ public class Modelo
 	String contrasena ="Studium2018;";
 	String usuario = "root";
 	
-	public Connection conectar(String baseDatos, String usuario, String clave)
+	public Connection conectar(String baseDatos, String usuario, String contrasena)
 	{
 		String driver = "com.mysql.jdbc.Driver";
 		String url ="jdbc:mysql://localhost:3306/"+baseDatos+"?autoReconnect=true&useSSL=false";
 		String login = usuario;
-		String password = clave;
+		String password = contrasena;
 		Connection connection = null;
 		Statement statement = null;
 		ResultSet rs = null;

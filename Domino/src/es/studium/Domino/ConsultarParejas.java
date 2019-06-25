@@ -23,7 +23,7 @@ public class ConsultarParejas extends JFrame {
 		this.setLocationRelativeTo(null);
 		this.setLayout(new BorderLayout());
 		this.add(new JScrollPane(tablaParejas),BorderLayout.CENTER);
-		pnlB.add(btnAceptar, btnImprimir);
+		pnlB.add(btnAceptar);
 		pnlB.add(btnImprimir);
 		this.add(pnlB,BorderLayout.SOUTH);
 		this.setVisible(true);
