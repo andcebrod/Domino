@@ -15,10 +15,14 @@ public class ControladorTorneo implements ActionListener, WindowListener
 	int j=i+1;
 	int numParejas;
 	String sentencia;
-
-	Torneo To;
+	Partida pt;
+	int Campeonato;
+	TorneoPrimeraJornada To;
 	Modelo Mo;
-	public ControladorTorneo(Torneo to, Modelo mo) 
+	int idPareja1;
+	int idPareja2;
+	
+	public ControladorTorneo(TorneoPrimeraJornada to, Modelo mo) 
 	{
 		this.To = to;
 		this.Mo = mo;
@@ -93,7 +97,29 @@ public class ControladorTorneo implements ActionListener, WindowListener
 	public void actionPerformed(ActionEvent ae) 
 	{
 		// TODO Auto-generated method stub
-
+		if(To.btnJugarPartida.equals(ae.getSource())) 
+		{
+			int filaSelecionada;
+			int mesa;
+			String Pareja1;
+			String Pareja2;
+			Campeonato = To.idCampeonato;
+			filaSelecionada = To.tablaParejas.getSelectedRow();
+			mesa = Integer.parseInt(To.modeloTabla.getValueAt(filaSelecionada, 0).toString());
+			Pareja1 = To.modeloTabla.getValueAt(filaSelecionada, 1).toString();
+			Pareja2 = To.modeloTabla.getValueAt(filaSelecionada, 2).toString();
+			String[] arrayPareja1 = Pareja1.split(".-");
+			String[] arrayPareja2 = Pareja2.split(".-");
+			idPareja1 = Integer.parseInt(arrayPareja1[0]);
+			idPareja2 = Integer.parseInt(arrayPareja2[0]);
+			
+			System.out.println(mesa+", Pareja1:"+arrayPareja1[0]+" "+arrayPareja1[1]+", Pareja2: "+arrayPareja2[0]+" "+arrayPareja2[1]);
+			
+			pt = new Partida(arrayPareja1[1],arrayPareja2[1], idPareja1, idPareja2, Campeonato,1,mesa);
+			new ControladorPartida(pt, Mo);
+			
+			
+		}
 
 	}
 

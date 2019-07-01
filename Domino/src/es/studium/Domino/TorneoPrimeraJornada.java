@@ -12,7 +12,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-public class Torneo extends JFrame {
+public class TorneoPrimeraJornada extends JFrame {
 
 	/**
 	 * 
@@ -38,7 +38,7 @@ public class Torneo extends JFrame {
 	JPanel pnlB;
 	
 	
-	public Torneo(String nombreTorneo, int idCamp) 
+	public TorneoPrimeraJornada(String nombreTorneo, int idCamp) 
 	{
 		pnlB = new JPanel();
 		modeloTabla = new DefaultTableModel();
