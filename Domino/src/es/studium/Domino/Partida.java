@@ -1,14 +1,11 @@
 package es.studium.Domino;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -22,31 +19,33 @@ public class Partida extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField txtPareja1;
-	private JTextField txtPareja2;
+	JTextField txtPareja1;
+	JTextField txtPareja2;
+	JButton btnAceptar = new JButton("Aceptar");
+	JButton btnCancelar = new JButton("Cancelar");
+	JButton btnImprimirPunt = new JButton("Imprimir puntuaciones");
+	
+	int idPareja1;
+	int idPareja2;
+	int idCampeonato;
+	int idJornada;
+	String Pareja1;
+	String Pareja2;
+	int Mesa;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Partida frame = new Partida();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public Partida() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+	
+	public Partida(String nomPareja1, String nomPareja2, int pareja1, int pareja2, int campeonato, int jornada, int mesa) 
+	{
+		idPareja1 = pareja1;
+		idPareja2 = pareja2;
+		idCampeonato = campeonato;
+		idJornada = jornada;
+		Pareja1 = nomPareja1;
+		Pareja2 = nomPareja2;
+		int Mesa = mesa;
+		
+		this.setTitle("Partida");
+		setBounds(100, 100, 573, 380);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -82,37 +81,35 @@ public class Partida extends JFrame {
 		contentPane.add(pnl2, gbc_pnl2);
 		
 		JLabel lblEq = new JLabel("Pareja 1:");
-		lblEq.setBounds(127, 51, 44, 14);
+		lblEq.setBounds(78, 79, 44, 14);
 		pnl2.add(lblEq);
 		
 		txtPareja1 = new JTextField();
-		txtPareja1.setBounds(209, 48, 86, 20);
+		txtPareja1.setBounds(333, 76, 86, 20);
 		pnl2.add(txtPareja1);
 		txtPareja1.setColumns(10);
 		
 		JLabel lblPareja = new JLabel("Pareja 2:");
-		lblPareja.setBounds(127, 82, 44, 14);
+		lblPareja.setBounds(78, 110, 44, 14);
 		pnl2.add(lblPareja);
 		
 		txtPareja2 = new JTextField();
-		txtPareja2.setBounds(209, 79, 86, 20);
+		txtPareja2.setBounds(333, 107, 86, 20);
 		pnl2.add(txtPareja2);
 		txtPareja2.setColumns(10);
 		
-		JButton btnAceptar = new JButton("Aceptar");
-		btnAceptar.setBounds(106, 118, 89, 23);
+		btnAceptar.setBounds(147, 170, 89, 23);
 		pnl2.add(btnAceptar);
 		
-		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(206, 118, 89, 23);
+		btnCancelar.setBounds(297, 170, 89, 23);
 		pnl2.add(btnCancelar);
 		
-		JLabel lblIntroduzcaLaPuntuacin = new JLabel("Introduzca la puntuaci\u00F3n de cada pareja:");
-		lblIntroduzcaLaPuntuacin.setBounds(106, 11, 204, 14);
+		JLabel lblIntroduzcaLaPuntuacin = new JLabel("Introduzca la puntuación de cada pareja:");
+		lblIntroduzcaLaPuntuacin.setBounds(170, 22, 204, 14);
 		pnl2.add(lblIntroduzcaLaPuntuacin);
 		
-		JButton btnNewButton = new JButton("Imprimir puntuaciones");
-		btnNewButton.setBounds(127, 165, 155, 23);
-		pnl2.add(btnNewButton);
+		btnImprimirPunt.setBounds(191, 217, 155, 23);
+		pnl2.add(btnImprimirPunt);
+		this.setVisible(true);
 	}
 }
