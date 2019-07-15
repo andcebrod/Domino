@@ -40,7 +40,8 @@ public class ControladorNuevoTorneo implements ActionListener, WindowListener
 		} else if(Nt.btnComenzar.equals(ae.getSource())) 
 		{
 			To = new TorneoPrimeraJornada(Nt.lblNombre.getText(), Nt.idCampeonato);
-			new ControladorTorneo(To, Mo);
+			new ControladorTorneoPrimeraJornada(To, Mo);
+			Nt.setVisible(false);
 		}
 	}
 	@Override

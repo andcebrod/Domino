@@ -12,7 +12,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-public class TorneoPrimeraJornada extends JFrame {
+public class Torneo extends JFrame {
 
 	/**
 	 * 
@@ -36,10 +36,10 @@ public class TorneoPrimeraJornada extends JFrame {
 	JTable tablaParejas; 
 	JButton btnJugarPartida;
 	JPanel pnlB;
+	
 	String nombre;
 	
-	
-	public TorneoPrimeraJornada(String nombreTorneo, int idCamp) 
+	public Torneo(String nombreTorneo, int idCamp) 
 	{
 		nombre = nombreTorneo;
 		pnlB = new JPanel();

@@ -80,7 +80,20 @@ public class Modelo
 		}
 		catch(SQLException e)
 		{
-			JOptionPane.showMessageDialog(null,"Error",e.getMessage(), JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null,e.getMessage(),"Error", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	public void ejecutarIDASIN(String sentencia, Connection c) 
+	{
+		try
+		{
+			Statement statement = c.createStatement();
+			statement.executeUpdate(sentencia);
+			
+		}
+		catch(SQLException e)
+		{
+			JOptionPane.showMessageDialog(null,e.getMessage(),"Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 

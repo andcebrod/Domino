@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
-public class ControladorTorneo implements ActionListener, WindowListener
+public class ControladorTorneoPrimeraJornada implements ActionListener, WindowListener
 {
 	int i=1;
 	int j=i+1;
@@ -17,14 +17,14 @@ public class ControladorTorneo implements ActionListener, WindowListener
 	String sentencia;
 	Partida pt;
 	int Campeonato;
-	Torneo To;
+	TorneoPrimeraJornada To;
 	Modelo Mo;
 	int idPareja1;
 	int idPareja2;
 	Torneo to2;
 	ControladorTorneo Cot;
 	
-	public ControladorTorneo(Torneo to, Modelo mo) 
+	public ControladorTorneoPrimeraJornada(TorneoPrimeraJornada to, Modelo mo) 
 	{
 		this.To = to;
 		this.Mo = mo;
@@ -47,7 +47,7 @@ public class ControladorTorneo implements ActionListener, WindowListener
 		int m=0;
 		while(i<=numParejas) 
 		{
-			sentencia = "SELECT idPareja, Jugador1, Jugador2 FROM parejas where posicion= "+i+" OR posicion = "+j+" order by puntosClasificacion desc, diferencia desc, puntosAFavor desc, puntosEnContra asc;";
+			sentencia = "SELECT idPareja, Jugador1, Jugador2 FROM parejas where idPareja= "+i+" OR idPareja = "+j+" order by 1;";
 			ResultSet rs = Mo.ejecutarSelect(sentencia, Mo.conectar(Mo.baseDeDatos, Mo.usuario, Mo.contrasena));
 			Object [] fila = new Object[4];
 			try {
@@ -122,7 +122,7 @@ public class ControladorTorneo implements ActionListener, WindowListener
 		} else if(To.mniAvanzarJornada.equals(ae.getSource())) 
 		{
 			int pos =1;
-			ResultSet rsPosiciones = Mo.ejecutarSelect("SELECT * FROM parejas order by puntosClasificacion desc, diferencia desc, puntosAFavor desc", Mo.conectar(Mo.baseDeDatos, Mo.usuario, Mo.contrasena));
+			ResultSet rsPosiciones = Mo.ejecutarSelect("SELECT * FROM parejas order by puntosClasificacion desc, diferencia desc, puntosAFavor desc;", Mo.conectar(Mo.baseDeDatos, Mo.usuario, Mo.contrasena));
 			try {
 				while(rsPosiciones.next()) {
 					Mo.ejecutarIDASIN("UPDATE parejas SET posicion ="+pos+" where idPareja = "+rsPosiciones.getInt("idPareja")+";",  Mo.conectar(Mo.baseDeDatos, Mo.usuario, Mo.contrasena));

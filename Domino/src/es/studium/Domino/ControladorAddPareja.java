@@ -22,7 +22,7 @@ public class ControladorAddPareja implements WindowListener, ActionListener{
 		if(Ap.btnCancelar.equals(ae.getSource())) {
 			Ap.setVisible(false);
 		} else if(Ap.btnAnadir.equals(ae.getSource())) {
-			Mo.ejecutarIDA("INSERT INTO `domino`.`parejas` (`jugador1`, `jugador2`, `localidad`) VALUES ('"+Ap.txtJugador1.getText()+"', '"+Ap.txtJugador2.getText()+"', '"+Ap.txtLocalidad.getText()+"');", Mo.conectar(Mo.baseDeDatos, Mo.usuario, Mo.contrasena), "Pareja añadida correctamente.");
+			Mo.ejecutarIDA("INSERT INTO `domino`.`parejas` (`jugador1`, `jugador2`, `localidad`, `puntosClasificacion`, `puntosAFavor`, `puntosEnContra`, `diferencia`) VALUES ('"+Ap.txtJugador1.getText()+"', '"+Ap.txtJugador2.getText()+"', '"+Ap.txtLocalidad.getText()+"', '0', '0', '0', '0');", Mo.conectar(Mo.baseDeDatos, Mo.usuario, Mo.contrasena), "Pareja añadida correctamente.");
 			Ap.setVisible(false);
 		}
 	}
