@@ -1,5 +1,7 @@
 package es.studium.Domino;
 
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -7,7 +9,12 @@ import java.awt.event.WindowListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.table.TableCellRenderer;
+
 
 public class ControladorTorneoPrimeraJornada implements ActionListener, WindowListener
 {
@@ -23,17 +30,45 @@ public class ControladorTorneoPrimeraJornada implements ActionListener, WindowLi
 	int idPareja2;
 	Torneo to2;
 	ControladorTorneo Cot;
+	ConsultarClasificacion Cc;
+	Color[] rowColors;
+	Color[] rowColors2;
+	Color[] rowColors3;
 	
 	public ControladorTorneoPrimeraJornada(TorneoPrimeraJornada to, Modelo mo) 
 	{
+		
 		this.To = to;
 		this.Mo = mo;
+		To.mniConsClasificacion.addActionListener(this);
 		To.btnJugarPartida.addActionListener(this);
 		To.mniAvanzarJornada.addActionListener(this);
 		To.modeloTabla.addColumn("Mesa");
 		To.modeloTabla.addColumn("Pareja 1");
 		To.modeloTabla.addColumn("Pareja 2");
 		To.modeloTabla.addColumn("Número Partida");
+		To.tablaParejas.setRowHeight(30);
+		rowColors = new Color[] {Color.white, Color.white, Color.white, Color.white};
+		rowColors2 = new Color[] {Color.black, Color.black, Color.black, Color.black};
+		rowColors3 = new Color[] {Color.gray, Color.gray, Color.gray, Color.gray};
+		To.tablaParejas.setDefaultRenderer(Object.class, new TableCellRenderer() {
+			@Override
+			public Component getTableCellRendererComponent(JTable table,Object value, boolean isSelected, boolean hasFocus,int row, int column) {
+				JLabel LblDato = new JLabel();
+				JPanel pane = new JPanel();
+				pane.setBackground(rowColors[row]);
+				pane.setForeground(rowColors2[row]);
+				LblDato.setText(To.modeloTabla.getValueAt(row, column).toString()); 
+				if(isSelected) {
+					pane.setBackground(rowColors3[row]);
+				}
+				pane.add(LblDato);
+				return pane;
+				
+			}
+		});
+		
+		
 		ResultSet nP = Mo.ejecutarSelect("SELECT count(idPareja) FROM parejas;", Mo.conectar(Mo.baseDeDatos, Mo.usuario, Mo.contrasena));
 		try {
 			nP.next();
@@ -115,7 +150,10 @@ public class ControladorTorneoPrimeraJornada implements ActionListener, WindowLi
 			String[] arrayPareja2 = Pareja2.split(".-");
 			idPareja1 = Integer.parseInt(arrayPareja1[0]);
 			idPareja2 = Integer.parseInt(arrayPareja2[0]);
-						
+			
+			rowColors[filaSelecionada] = Color.RED;
+			To.tablaParejas.repaint();
+			
 			pt = new Partida(arrayPareja1[1],arrayPareja2[1], idPareja1, idPareja2, Campeonato,1,mesa);
 			new ControladorPartida(pt, Mo);
 	
@@ -135,6 +173,10 @@ public class ControladorTorneoPrimeraJornada implements ActionListener, WindowLi
 			to2 = new Torneo(To.nombre, To.idCampeonato);
 			Cot = new ControladorTorneo(to2, Mo);
 			To.setVisible(false);
+		}
+		else if(To.mniConsClasificacion.equals(ae.getSource())) {
+			Cc = new ConsultarClasificacion();
+			new ControladorConsultarClasificacion(Cc, Mo);
 		}
 
 	}

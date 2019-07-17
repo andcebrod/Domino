@@ -20,27 +20,31 @@ import com.itextpdf.text.Font;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 
-public class ControladorConsultarParejas implements ActionListener, WindowListener{
-	ConsultarParejas Cc;
+public class ControladorConsultarClasificacion implements ActionListener, WindowListener{
+	ConsultarClasificacion Cc;
 	Modelo Mo;
 	Document documento = new Document(PageSize.A4.rotate());
 	
-	public ControladorConsultarParejas(ConsultarParejas cc, Modelo mo) 
+	public ControladorConsultarClasificacion(ConsultarClasificacion cc, Modelo mo) 
 	{
 		this.Cc = cc;
 		this.Mo = mo;
 		Cc.btnAceptar.addActionListener(this);
 		Cc.btnImprimir.addActionListener(this);
+		Cc.modeloTabla.addColumn("Posición");
 		Cc.modeloTabla.addColumn("Número de Pareja");
 		Cc.modeloTabla.addColumn("Jugador 1");
 		Cc.modeloTabla.addColumn("Jugador 2");
-		Cc.modeloTabla.addColumn("Localidad");
-		ResultSet Co = Mo.ejecutarSelect("select idPareja, jugador1, jugador2, localidad from parejas;", Mo.conectar(Mo.baseDeDatos, Mo.usuario, Mo.contrasena));
+		Cc.modeloTabla.addColumn("Puntos Clasificación");
+		Cc.modeloTabla.addColumn("Puntos a Favor");
+		Cc.modeloTabla.addColumn("Puntos en Contra");
+		Cc.modeloTabla.addColumn("Diferencia");
+		ResultSet Co = Mo.ejecutarSelect("select posicion,idPareja, jugador1, jugador2,puntosClasificacion, puntosAFavor, puntosEnContra, diferencia from parejas order by posicion asc, puntosClasificacion desc, diferencia desc, puntosAFavor desc;", Mo.conectar(Mo.baseDeDatos, Mo.usuario, Mo.contrasena));
 		try {
 			while (Co.next())
 			{
-				Object [] fila = new Object[4];
-				for (int i=0;i<4;i++)
+				Object [] fila = new Object[8];
+				for (int i=0;i<8;i++)
 					fila[i] = Co.getObject(i+1); 
 				Cc.modeloTabla.addRow(fila); 
 			}
@@ -71,8 +75,8 @@ public class ControladorConsultarParejas implements ActionListener, WindowListen
 				PdfWriter.getInstance(documento,ficheroPdf).setInitialLeading(20);
 				documento.open();
 				
-				PdfPTable tabla = new PdfPTable(4);
-				Paragraph titulo = new Paragraph("Parejas Torneo: ");
+				PdfPTable tabla = new PdfPTable(8);
+				Paragraph titulo = new Paragraph("CLASIFICACIÓN: ");
 				Paragraph titulo2 = new Paragraph("    ");
 				titulo.getFont().setStyle(Font.BOLD);
 				titulo.getFont().setSize(20);
@@ -80,44 +84,75 @@ public class ControladorConsultarParejas implements ActionListener, WindowListen
 				titulo2.getFont().setSize(20);
 				documento.add(titulo);
 				documento.add(titulo2);
-				Paragraph idCliente = new Paragraph("Nº Pareja");
-				idCliente.getFont().setStyle(Font.BOLD);
-				idCliente.getFont().setSize(15);
-				tabla.addCell(idCliente);
+				Paragraph posicion = new Paragraph("Posición");
+				posicion.getFont().setStyle(Font.BOLD);
+				tabla.addCell(posicion);
 
-				Paragraph nombreCliente = new Paragraph("Jugador 1");
-				nombreCliente.getFont().setStyle(Font.BOLD);
-				nombreCliente.getFont().setSize(15);
-				tabla.addCell(nombreCliente);
+				Paragraph numpareja = new Paragraph("Nº Pareja");
+				numpareja.getFont().setStyle(Font.BOLD);
+				tabla.addCell(numpareja);
 
-				Paragraph direccionCliente = new Paragraph("Jugador 2");
-				direccionCliente.getFont().setStyle(Font.BOLD);
-				direccionCliente.getFont().setSize(15);
-				tabla.addCell(direccionCliente);
+				Paragraph jugador1 = new Paragraph("Jugador 1");
+				jugador1.getFont().setStyle(Font.BOLD);
+				tabla.addCell(jugador1);
 
-				Paragraph telefono = new Paragraph("Localidad");
-				telefono.getFont().setStyle(Font.BOLD);
-				telefono.getFont().setSize(15);
-				tabla.addCell(telefono);
+				Paragraph jugador2 = new Paragraph("Jugador 2");
+				jugador2.getFont().setStyle(Font.BOLD);
+				tabla.addCell(jugador2);
 
-				ResultSet Co = Mo.ejecutarSelect("select idPareja, jugador1, jugador2, localidad from parejas;", Mo.conectar(Mo.baseDeDatos, Mo.usuario, Mo.contrasena));
+				Paragraph puntosClas = new Paragraph("Puntos Clasificación");
+				puntosClas.getFont().setStyle(Font.BOLD);
+				tabla.addCell(puntosClas);
+				
+				Paragraph puntosAFavor = new Paragraph("Puntos a Favor");
+				puntosAFavor.getFont().setStyle(Font.BOLD);
+				tabla.addCell(puntosAFavor);
+				
+				Paragraph puntosEnContra = new Paragraph("Puntos en Contra");
+				puntosEnContra.getFont().setStyle(Font.BOLD);
+				tabla.addCell(puntosEnContra);
+				
+				Paragraph diferencia = new Paragraph("Diferencia");
+				diferencia.getFont().setStyle(Font.BOLD);
+				tabla.addCell(diferencia);
+				
+				
+
+				ResultSet Co = Mo.ejecutarSelect("select posicion,idPareja, jugador1, jugador2, puntosClasificacion, puntosAFavor, puntosEnContra, diferencia from parejas order by posicion asc, puntosClasificacion desc, diferencia desc, puntosAFavor desc;", Mo.conectar(Mo.baseDeDatos, Mo.usuario, Mo.contrasena));
 				try {
 					while (Co.next())
 					{
-						for (int i=0;i<4;i++) {
+						for (int i=0;i<8;i++) {
 							if(i==0) {
-								tabla.addCell(Co.getString("idPareja")); 
-							} else if(i==1) {
+								Paragraph numPos = new Paragraph(Co.getString("posicion"));
+								numPos.getFont().setStyle(Font.BOLD);
+								tabla.addCell(numPos); 
+							}
+							else if(i==1) {
+								tabla.addCell(Co.getString("idPareja"));
+							}
+							else if(i==2) {
 								tabla.addCell(Co.getString("jugador1"));
-							} else if(i==2) {
+							} 
+							else if(i==3) {
 								tabla.addCell(Co.getString("jugador2"));
-							} else if(i==3) {
-								tabla.addCell(Co.getString("localidad"));
+							}
+							else if(i==4) {
+								tabla.addCell(Co.getString("puntosClasificacion"));
+							}
+							else if(i==5) {
+								tabla.addCell(Co.getString("puntosAFavor"));
+							}
+							else if(i==6) {
+								tabla.addCell(Co.getString("puntosEnContra"));
+							}
+							else if(i==7) {
+								tabla.addCell(Co.getString("diferencia"));
 							}
 						}
 					}
-					documento.setPageSize(PageSize.A4);
 					documento.add(tabla);
+					documento.setPageSize(PageSize.A4);
 					documento.close();
 					JOptionPane.showMessageDialog(null,"Documento pdf creado correctamente.","Documento creado", JOptionPane.INFORMATION_MESSAGE);
 				} catch (SQLException e) {

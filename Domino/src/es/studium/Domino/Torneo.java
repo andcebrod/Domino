@@ -32,7 +32,7 @@ public class Torneo extends JFrame {
 	JMenuItem mniModificarPareja;
 	JMenuItem mntmAyuda;
 	
-	DefaultTableModel modeloTabla;
+	MyOwnTableModel modeloTabla;
 	JTable tablaParejas; 
 	JButton btnJugarPartida;
 	JPanel pnlB;
@@ -43,14 +43,15 @@ public class Torneo extends JFrame {
 	{
 		nombre = nombreTorneo;
 		pnlB = new JPanel();
-		modeloTabla = new DefaultTableModel();
+		modeloTabla = new MyOwnTableModel();
 		tablaParejas= new JTable(modeloTabla);
+		tablaParejas.setShowVerticalLines(false);
 		idCampeonato = idCamp;
 		btnJugarPartida = new JButton("Jugar Partida");
 		
 		this.setTitle("Torneo "+nombreTorneo);
 		this.setLocationRelativeTo(null);
-		this.setLayout(new BorderLayout());
+		getContentPane().setLayout(new BorderLayout());
 		this.setBounds(100, 100, 706, 418);
 		
 		menuBar = new JMenuBar();
@@ -84,9 +85,9 @@ public class Torneo extends JFrame {
 		mnAyuda.add(mntmAyuda);
 		
 		
-		this.add(new JScrollPane(tablaParejas),BorderLayout.CENTER);
+		getContentPane().add(new JScrollPane(tablaParejas),BorderLayout.CENTER);
 		pnlB.add(btnJugarPartida);
-		this.add(pnlB,BorderLayout.SOUTH);
+		getContentPane().add(pnlB,BorderLayout.SOUTH);
 		this.setVisible(true);
 		
 	}

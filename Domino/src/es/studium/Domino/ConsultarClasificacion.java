@@ -5,7 +5,7 @@ import java.awt.BorderLayout;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-public class ConsultarParejas extends JFrame {
+public class ConsultarClasificacion extends JFrame {
 	/**
 	 * 
 	 */
@@ -16,10 +16,10 @@ public class ConsultarParejas extends JFrame {
 	JButton btnImprimir = new JButton("Imprimir PDF");
 	JPanel pnlB = new JPanel();
 
-	public ConsultarParejas() 
+	public ConsultarClasificacion() 
 	{
-		this.setSize(700,400);
-		this.setTitle("Consulta Parejas");
+		this.setSize(980,400);
+		this.setTitle("Clasificación");
 		this.setLocationRelativeTo(null);
 		this.setLayout(new BorderLayout());
 		this.add(new JScrollPane(tablaParejas),BorderLayout.CENTER);

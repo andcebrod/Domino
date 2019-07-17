@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
+import javax.swing.JOptionPane;
+
 import com.itextpdf.text.Document;
 
 public class ControladorPartida implements WindowListener, ActionListener 
@@ -31,7 +33,7 @@ public class ControladorPartida implements WindowListener, ActionListener
 			if(Integer.parseInt(Pt.txtPareja1.getText())>Integer.parseInt(Pt.txtPareja2.getText())) 
 			{
 				Mo.ejecutarIDASIN("INSERT INTO partidas (puntosLocal, puntosVisitante, idPareja1FK, idPareja2FK, idCampeonatoFK, idJornadaFK) VALUES ("+Pt.txtPareja1.getText()+","+Pt.txtPareja2.getText()+","+Pt.idPareja1+","+Pt.idPareja2+","+Pt.idCampeonato+","+Pt.idJornada+") ", Mo.conectar(Mo.baseDeDatos, Mo.usuario, Mo.contrasena));
-				Mo.ejecutarIDASIN("UPDATE parejas SET puntosAFavor = puntosAFavor+"+Pt.txtPareja1.getText()+",puntosEnContra=puntosEnContra+"+Pt.txtPareja2.getText()+",puntosClasificacion=puntosClasificacion+3 WHERE idPareja ="+Pt.idPareja1+";", Mo.conectar(Mo.baseDeDatos, Mo.usuario, Mo.contrasena));
+				Mo.ejecutarIDASIN("UPDATE parejas SET puntosAFavor = puntosAFavor+"+Pt.txtPareja1.getText()+",puntosEnContra=puntosEnContra+"+Pt.txtPareja2.getText()+",puntosClasificacion=puntosClasificacion+1 WHERE idPareja ="+Pt.idPareja1+";", Mo.conectar(Mo.baseDeDatos, Mo.usuario, Mo.contrasena));
 				Mo.ejecutarIDASIN("UPDATE parejas SET diferencia = puntosAFavor-puntosEnContra where idPareja="+Pt.idPareja1+";", Mo.conectar(Mo.baseDeDatos, Mo.usuario, Mo.contrasena));
 				Mo.ejecutarIDASIN("UPDATE parejas SET puntosAFavor = puntosAFavor+"+Pt.txtPareja2.getText()+",puntosEnContra=puntosEnContra+"+Pt.txtPareja1.getText()+" WHERE idPareja ="+Pt.idPareja2+";", Mo.conectar(Mo.baseDeDatos, Mo.usuario, Mo.contrasena));
 				Mo.ejecutarIDA("UPDATE parejas SET diferencia = puntosAFavor-puntosEnContra where idPareja="+Pt.idPareja2+";", Mo.conectar(Mo.baseDeDatos, Mo.usuario, Mo.contrasena), "Puntos añadidos correctamente.");
@@ -41,17 +43,12 @@ public class ControladorPartida implements WindowListener, ActionListener
 				Mo.ejecutarIDASIN("INSERT INTO partidas (puntosLocal, puntosVisitante, idPareja1FK, idPareja2FK, idCampeonatoFK, idJornadaFK) VALUES ("+Pt.txtPareja1.getText()+","+Pt.txtPareja2.getText()+","+Pt.idPareja1+","+Pt.idPareja2+","+Pt.idCampeonato+","+Pt.idJornada+") ", Mo.conectar(Mo.baseDeDatos, Mo.usuario, Mo.contrasena));
 				Mo.ejecutarIDASIN("UPDATE parejas SET puntosAFavor = puntosAFavor+"+Pt.txtPareja1.getText()+",puntosEnContra=puntosEnContra+"+Pt.txtPareja2.getText()+" WHERE idPareja ="+Pt.idPareja1+";", Mo.conectar(Mo.baseDeDatos, Mo.usuario, Mo.contrasena));
 				Mo.ejecutarIDASIN("UPDATE parejas SET diferencia = puntosAFavor-puntosEnContra where idPareja="+Pt.idPareja1+";", Mo.conectar(Mo.baseDeDatos, Mo.usuario, Mo.contrasena));
-				Mo.ejecutarIDASIN("UPDATE parejas SET puntosAFavor = puntosAFavor+"+Pt.txtPareja2.getText()+",puntosEnContra=puntosEnContra+"+Pt.txtPareja1.getText()+",puntosClasificacion=puntosClasificacion+3 WHERE idPareja ="+Pt.idPareja2+";", Mo.conectar(Mo.baseDeDatos, Mo.usuario, Mo.contrasena));
+				Mo.ejecutarIDASIN("UPDATE parejas SET puntosAFavor = puntosAFavor+"+Pt.txtPareja2.getText()+",puntosEnContra=puntosEnContra+"+Pt.txtPareja1.getText()+",puntosClasificacion=puntosClasificacion+1 WHERE idPareja ="+Pt.idPareja2+";", Mo.conectar(Mo.baseDeDatos, Mo.usuario, Mo.contrasena));
 				Mo.ejecutarIDA("UPDATE parejas SET diferencia = puntosAFavor-puntosEnContra where idPareja="+Pt.idPareja2+";", Mo.conectar(Mo.baseDeDatos, Mo.usuario, Mo.contrasena), "Puntos añadidos correctamente.");
 				Pt.setVisible(false);
 			} else if (Integer.parseInt(Pt.txtPareja1.getText())==Integer.parseInt(Pt.txtPareja2.getText())) 
 			{
-				Mo.ejecutarIDASIN("INSERT INTO partidas (puntosLocal, puntosVisitante, idPareja1FK, idPareja2FK, idCampeonatoFK, idJornadaFK) VALUES ("+Pt.txtPareja1.getText()+","+Pt.txtPareja2.getText()+","+Pt.idPareja1+","+Pt.idPareja2+","+Pt.idCampeonato+","+Pt.idJornada+") ", Mo.conectar(Mo.baseDeDatos, Mo.usuario, Mo.contrasena));
-				Mo.ejecutarIDASIN("UPDATE parejas SET puntosAFavor = puntosAFavor+"+Pt.txtPareja1.getText()+",puntosEnContra=puntosEnContra+"+Pt.txtPareja2.getText()+",puntosClasificacion=puntosClasificacion+1 WHERE idPareja ="+Pt.idPareja1+";", Mo.conectar(Mo.baseDeDatos, Mo.usuario, Mo.contrasena));
-				Mo.ejecutarIDASIN("UPDATE parejas SET diferencia = puntosAFavor-puntosEnContra where idPareja="+Pt.idPareja1+";", Mo.conectar(Mo.baseDeDatos, Mo.usuario, Mo.contrasena));
-				Mo.ejecutarIDASIN("UPDATE parejas SET puntosAFavor = puntosAFavor+"+Pt.txtPareja2.getText()+",puntosEnContra=puntosEnContra+"+Pt.txtPareja1.getText()+",puntosClasificacion=puntosClasificacion+1 WHERE idPareja ="+Pt.idPareja2+";", Mo.conectar(Mo.baseDeDatos, Mo.usuario, Mo.contrasena));
-				Mo.ejecutarIDA("UPDATE parejas SET diferencia = puntosAFavor-puntosEnContra where idPareja="+Pt.idPareja2+";", Mo.conectar(Mo.baseDeDatos, Mo.usuario, Mo.contrasena), "Puntos añadidos correctamente.");
-				Pt.setVisible(false);
+				JOptionPane.showMessageDialog(null,"COMPRUEBE QUE LA PUNTUACIÓN ESTÉ CORRECTA","Error", JOptionPane.ERROR_MESSAGE);
 			}
 			
 		} else if(Pt.btnImprimirPunt.equals(ae.getSource())) 

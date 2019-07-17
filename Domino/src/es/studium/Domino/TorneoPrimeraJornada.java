@@ -1,6 +1,8 @@
 package es.studium.Domino;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -11,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 public class TorneoPrimeraJornada extends JFrame {
 
@@ -32,19 +35,24 @@ public class TorneoPrimeraJornada extends JFrame {
 	JMenuItem mniModificarPareja;
 	JMenuItem mntmAyuda;
 	
-	DefaultTableModel modeloTabla;
+	MyOwnTableModel modeloTabla;
 	JTable tablaParejas; 
 	JButton btnJugarPartida;
 	JPanel pnlB;
 	String nombre;
 	
-	
 	public TorneoPrimeraJornada(String nombreTorneo, int idCamp) 
 	{
+		
+		
 		nombre = nombreTorneo;
 		pnlB = new JPanel();
-		modeloTabla = new DefaultTableModel();
+		modeloTabla = new MyOwnTableModel();
 		tablaParejas= new JTable(modeloTabla);
+		
+		
+		
+		tablaParejas.setShowVerticalLines(false);
 		idCampeonato = idCamp;
 		btnJugarPartida = new JButton("Jugar Partida");
 		
