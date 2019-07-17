@@ -14,6 +14,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.ListSelectionModel;
 
 public class TorneoPrimeraJornada extends JFrame {
 
@@ -49,16 +50,14 @@ public class TorneoPrimeraJornada extends JFrame {
 		pnlB = new JPanel();
 		modeloTabla = new MyOwnTableModel();
 		tablaParejas= new JTable(modeloTabla);
-		
-		
-		
+		tablaParejas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tablaParejas.setShowVerticalLines(false);
 		idCampeonato = idCamp;
 		btnJugarPartida = new JButton("Jugar Partida");
 		
 		this.setTitle("Torneo "+nombreTorneo);
 		this.setLocationRelativeTo(null);
-		this.setLayout(new BorderLayout());
+		getContentPane().setLayout(new BorderLayout());
 		this.setBounds(100, 100, 706, 418);
 		
 		menuBar = new JMenuBar();
@@ -92,9 +91,9 @@ public class TorneoPrimeraJornada extends JFrame {
 		mnAyuda.add(mntmAyuda);
 		
 		
-		this.add(new JScrollPane(tablaParejas),BorderLayout.CENTER);
+		getContentPane().add(new JScrollPane(tablaParejas),BorderLayout.CENTER);
 		pnlB.add(btnJugarPartida);
-		this.add(pnlB,BorderLayout.SOUTH);
+		getContentPane().add(pnlB,BorderLayout.SOUTH);
 		this.setVisible(true);
 		
 	}

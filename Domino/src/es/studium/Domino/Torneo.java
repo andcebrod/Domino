@@ -10,6 +10,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 public class Torneo extends JFrame {
@@ -46,6 +47,7 @@ public class Torneo extends JFrame {
 		modeloTabla = new MyOwnTableModel();
 		tablaParejas= new JTable(modeloTabla);
 		tablaParejas.setShowVerticalLines(false);
+		tablaParejas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		idCampeonato = idCamp;
 		btnJugarPartida = new JButton("Jugar Partida");
 		
