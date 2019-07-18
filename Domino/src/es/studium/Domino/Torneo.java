@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -12,6 +13,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.SwingConstants;
+import java.awt.Font;
 
 public class Torneo extends JFrame {
 
@@ -37,13 +40,15 @@ public class Torneo extends JFrame {
 	JTable tablaParejas; 
 	JButton btnJugarPartida;
 	JPanel pnlB;
-	
+	int Jornada;
 	String nombre;
+	JLabel lblJornada;
 	
-	public Torneo(String nombreTorneo, int idCamp) 
+	public Torneo(String nombreTorneo, int idCamp, int jornada) 
 	{
 		nombre = nombreTorneo;
 		pnlB = new JPanel();
+		Jornada = jornada+1;
 		modeloTabla = new MyOwnTableModel();
 		tablaParejas= new JTable(modeloTabla);
 		tablaParejas.setShowVerticalLines(false);
@@ -85,8 +90,10 @@ public class Torneo extends JFrame {
 		
 		mntmAyuda = new JMenuItem("Ayuda");
 		mnAyuda.add(mntmAyuda);
-		
-		
+		lblJornada = new JLabel("Jornada Nº"+Jornada);
+		lblJornada.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblJornada.setHorizontalAlignment(SwingConstants.CENTER);
+		getContentPane().add(lblJornada, BorderLayout.NORTH);
 		getContentPane().add(new JScrollPane(tablaParejas),BorderLayout.CENTER);
 		pnlB.add(btnJugarPartida);
 		getContentPane().add(pnlB,BorderLayout.SOUTH);

@@ -6,6 +6,7 @@ import java.awt.Component;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -15,6 +16,8 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.ListSelectionModel;
+import java.awt.Font;
+import javax.swing.SwingConstants;
 
 public class TorneoPrimeraJornada extends JFrame {
 
@@ -41,6 +44,7 @@ public class TorneoPrimeraJornada extends JFrame {
 	JButton btnJugarPartida;
 	JPanel pnlB;
 	String nombre;
+	JLabel lblJornada;
 	
 	public TorneoPrimeraJornada(String nombreTorneo, int idCamp) 
 	{
@@ -90,7 +94,10 @@ public class TorneoPrimeraJornada extends JFrame {
 		mntmAyuda = new JMenuItem("Ayuda");
 		mnAyuda.add(mntmAyuda);
 		
-		
+		lblJornada = new JLabel("Jornada Nº"+1);
+		lblJornada.setHorizontalAlignment(SwingConstants.CENTER);
+		lblJornada.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		getContentPane().add(lblJornada, BorderLayout.NORTH);
 		getContentPane().add(new JScrollPane(tablaParejas),BorderLayout.CENTER);
 		pnlB.add(btnJugarPartida);
 		getContentPane().add(pnlB,BorderLayout.SOUTH);

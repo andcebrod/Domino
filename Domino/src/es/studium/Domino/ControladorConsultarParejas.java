@@ -63,7 +63,7 @@ public class ControladorConsultarParejas implements ActionListener, WindowListen
 			try 
 			{
 				
-				FileDialog fd = new FileDialog(Cc, "Seleccionar archivo", FileDialog.SAVE);
+				FileDialog fd = new FileDialog(Cc, "Guardar archivo", FileDialog.SAVE);
 				fd.setFile("*.pdf");
 				fd.setVisible(true);
 				String filename = fd.getDirectory()+fd.getFile();
@@ -80,25 +80,25 @@ public class ControladorConsultarParejas implements ActionListener, WindowListen
 				titulo2.getFont().setSize(20);
 				documento.add(titulo);
 				documento.add(titulo2);
-				Paragraph idCliente = new Paragraph("Nº Pareja");
-				idCliente.getFont().setStyle(Font.BOLD);
-				idCliente.getFont().setSize(15);
-				tabla.addCell(idCliente);
+				Paragraph numPareja = new Paragraph("Nº Pareja");
+				numPareja.getFont().setStyle(Font.BOLD);
+				numPareja.getFont().setSize(15);
+				tabla.addCell(numPareja);
 
-				Paragraph nombreCliente = new Paragraph("Jugador 1");
-				nombreCliente.getFont().setStyle(Font.BOLD);
-				nombreCliente.getFont().setSize(15);
-				tabla.addCell(nombreCliente);
+				Paragraph jugador1 = new Paragraph("Jugador 1");
+				jugador1.getFont().setStyle(Font.BOLD);
+				jugador1.getFont().setSize(15);
+				tabla.addCell(jugador1);
 
-				Paragraph direccionCliente = new Paragraph("Jugador 2");
-				direccionCliente.getFont().setStyle(Font.BOLD);
-				direccionCliente.getFont().setSize(15);
-				tabla.addCell(direccionCliente);
+				Paragraph jugador2 = new Paragraph("Jugador 2");
+				jugador2.getFont().setStyle(Font.BOLD);
+				jugador2.getFont().setSize(15);
+				tabla.addCell(jugador2);
 
-				Paragraph telefono = new Paragraph("Localidad");
-				telefono.getFont().setStyle(Font.BOLD);
-				telefono.getFont().setSize(15);
-				tabla.addCell(telefono);
+				Paragraph localidad = new Paragraph("Localidad");
+				localidad.getFont().setStyle(Font.BOLD);
+				localidad.getFont().setSize(15);
+				tabla.addCell(localidad);
 
 				ResultSet Co = Mo.ejecutarSelect("select idPareja, jugador1, jugador2, localidad from parejas;", Mo.conectar(Mo.baseDeDatos, Mo.usuario, Mo.contrasena));
 				try {

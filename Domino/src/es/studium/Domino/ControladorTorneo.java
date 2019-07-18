@@ -33,11 +33,13 @@ public class ControladorTorneo implements ActionListener, WindowListener
 	Color[] rowColors;
 	Color[] rowColors2;
 	Color[] rowColors3;
+	int jornada;
 	
 	public ControladorTorneo(Torneo to, Modelo mo) 
 	{
 		this.To = to;
 		this.Mo = mo;
+		jornada = To.Jornada;
 		To.btnJugarPartida.addActionListener(this);
 		To.mniAvanzarJornada.addActionListener(this);
 		To.mniConsClasificacion.addActionListener(this);
@@ -149,7 +151,7 @@ public class ControladorTorneo implements ActionListener, WindowListener
 			rowColors[filaSelecionada] = Color.RED;
 			To.tablaParejas.repaint();
 						
-			pt = new Partida(arrayPareja1[1],arrayPareja2[1], idPareja1, idPareja2, Campeonato,1,mesa);
+			pt = new Partida(arrayPareja1[1],arrayPareja2[1], idPareja1, idPareja2, Campeonato,jornada,mesa);
 			new ControladorPartida(pt, Mo);
 	
 		} else if(To.mniAvanzarJornada.equals(ae.getSource())) 
@@ -165,7 +167,7 @@ public class ControladorTorneo implements ActionListener, WindowListener
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			to2 = new Torneo(To.nombre, To.idCampeonato);
+			to2 = new Torneo(To.nombre, To.idCampeonato, jornada);
 			Cot = new ControladorTorneo(to2, Mo);
 			To.setVisible(false);
 		} else if(To.mniConsClasificacion.equals(ae.getSource())) {

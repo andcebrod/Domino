@@ -11,9 +11,13 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-import java.awt.GridLayout;
+import javax.swing.JDialog;
 
-public class Partida extends JFrame {
+import java.awt.GridLayout;
+import java.awt.Window.Type;
+import java.awt.Dialog.ModalExclusionType;
+
+public class Partida extends JDialog {
 
 	/**
 	 * 
@@ -37,13 +41,15 @@ public class Partida extends JFrame {
 	
 	public Partida(String nomPareja1, String nomPareja2, int pareja1, int pareja2, int campeonato, int jornada, int mesa) 
 	{
+		setType(Type.UTILITY);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		idPareja1 = pareja1;
 		idPareja2 = pareja2;
 		idCampeonato = campeonato;
 		idJornada = jornada;
 		Pareja1 = nomPareja1;
 		Pareja2 = nomPareja2;
-		int Mesa = mesa;
+		Mesa = mesa;
 		
 		this.setTitle("Partida");
 		setBounds(100, 100, 573, 380);

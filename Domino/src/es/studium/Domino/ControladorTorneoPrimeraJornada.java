@@ -28,6 +28,7 @@ public class ControladorTorneoPrimeraJornada implements ActionListener, WindowLi
 	Modelo Mo;
 	int idPareja1;
 	int idPareja2;
+	int Jornada;
 	Torneo to2;
 	ControladorTorneo Cot;
 	ConsultarClasificacion Cc;
@@ -170,7 +171,7 @@ public class ControladorTorneoPrimeraJornada implements ActionListener, WindowLi
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			to2 = new Torneo(To.nombre, To.idCampeonato);
+			to2 = new Torneo(To.nombre, To.idCampeonato, 1);
 			Cot = new ControladorTorneo(to2, Mo);
 			To.setVisible(false);
 		}
